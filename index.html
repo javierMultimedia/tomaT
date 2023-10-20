@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turno On Screen</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    body{
+        display: flex;
+        justify-content: end;
+        background-color: black;
+    }
+    .container-main-turnos{
+        height: 100vh;
+        width: calc(100vh / 3);
+        display: flex;
+        justify-content:space-between;
+        align-items: center;
+        flex-flow: column;
+    }
+
+
+
+    .container-titles{
+        width: 95%;
+        height: 15%;
+        background-color: #EF7D32;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-flow: column;
+        border-radius: 3%;
+    }
+    .container-titles h1{
+        font-size: 50px;
+        color: white;
+    }
+    .container-titles-subtitle{
+        width: 100%;
+        height: auto;
+        color: white;
+        display: flex;
+        justify-content: space-around;
+    }
+    .container-titles-subtitle h2{
+        font-size: 2.5rem;
+    }
+
+
+
+    .container-turnos{
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-flow: column;
+    }
+    .turno{
+        width: 95%;
+        height: auto;
+        margin: 0 0 1rem 0;
+        display: flex;
+        justify-content: space-around;
+        background-color: #FFDEAD;
+        border-radius: 3%;
+    }
+    .turno p{
+        font-size: 3rem;
+        color: #454545;
+        margin: 0.5rem 0 0.5rem 0;
+    }
+    .turno-nuevo{
+        width: 95%;
+        height: auto;
+        margin: 2.5rem 0 0 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-flow: column;
+        background-color: #EF7D32;
+        border-radius: 3%;
+    }
+    .turno-nuevo p{
+        font-size: 3.5rem;
+        color: white;
+        margin: 0.5rem 0 0.5rem 0;
+    }
+    
+    .turno-nuevo .caja{
+        font-size: 2.5rem;
+        margin: 1.5rem 0 0 0;
+    }
+
+
+
+
+    .date{
+        width: fit-content;
+        height: auto;
+        display: flex;
+        align-self: end;
+        justify-content: center;
+        flex-flow: column;
+    }
+    .date .fecha{
+        align-self: center;
+        margin: 0 1rem 0.5rem 1rem;
+        color: white;
+        font-size: 1rem;
+    }
+    .date .hora{
+        margin: 0 1rem 1rem 1rem;
+        font-size: 1.7rem;
+        color: white;
+    }
+    
+</style>
+<body>
+    <div class="container-main-turnos">
+        <div class="container-titles">
+            <h1>En atención</h1>
+            <div class="container-titles-subtitle">
+                <h2>Turno</h2>
+                <h2>Caja</h2>
+            </div>
+        </div>
+
+
+        <div class="container-turnos">
+            <div class="turno">
+                <p>C03</p>
+                <p>04</p>
+            </div>
+            <div class="turno">
+                <p>M01</p>
+                <p>07</p>
+            </div>
+            <div class="turno">
+                <p>C05</p>
+                <p>02</p>
+            </div>
+            <div class="turno">
+                <p>C05</p>
+                <p>02</p>
+            </div>
+            <div class="turno-nuevo">
+                <p>C09</p>
+
+                <p class="caja">Caja</p>
+                <p>01</p>
+            </div>
+        </div>
+
+
+        <div class="date">
+            <span class="fecha" id="fecha"></span>
+            <span class="hora" id="hora"></span>
+        </div>
+    </div>
+</body>
+
+<script>
+    function mostrarHora() {
+        var fecha = new Date();
+        var horas = fecha.getHours();
+        var minutos = fecha.getMinutes();
+        var ampm = horas >= 12 ? 'PM' : 'AM';
+        horas = horas % 12;
+        horas = horas ? horas : 12;
+        minutos = minutos < 10 ? '0' + minutos : minutos;
+        var horaActual = horas + ':' + minutos + ' ' + ampm;
+        document.getElementById('hora').textContent = horaActual;
+    }
+    setInterval(mostrarHora, 1000);
+
+
+    function mostrarFecha() {
+            var fecha = new Date();
+            var dia = fecha.getDate();
+            var mes = fecha.getMonth() + 1; // Los meses comienzan desde 0
+            var anio = fecha.getFullYear();
+
+            // Agregar un cero delante del día y mes si son menores que 10
+            dia = dia < 10 ? '0' + dia : dia;
+            mes = mes < 10 ? '0' + mes : mes;
+
+            // Construir la cadena de la fecha en el formato deseado (dd/mm/yyyy)
+            var fechaCompleta = dia + '/' + mes + '/' + anio;
+
+            // Mostrar la fecha en el span
+            document.getElementById('fecha').textContent = fechaCompleta;
+        }
+        // Llamar a la función para mostrar la fecha al cargar la página
+        mostrarFecha();
+</script>
+</html>
